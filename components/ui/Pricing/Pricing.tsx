@@ -54,6 +54,10 @@ export default function Pricing({ user, products, subscription }: Props) {
       return router.push('/signin/signup');
     }
 
+    if (subscription) {
+      return router.push(getErrorRedirect('/account', 'You already have a subscription.', 'You can use the customer portal to manage active subscriptions.'));
+    }
+
     const { errorRedirect, sessionId } = await checkoutWithStripe(
       price,
       currentPath
